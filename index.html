@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌈 Grand Holi Celebration 🎨</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+font-family:'Poppins',sans-serif;
+background:black;
+color:white;
+text-align:center;
+}
+
+/* CINEMATIC INTRO */
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle,#000,#111);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:2.2em;
+letter-spacing:4px;
+animation:introFade 5s forwards;
+z-index:10;
+}
+
+@keyframes introFade{
+0%{opacity:1}
+85%{opacity:1}
+100%{opacity:0;visibility:hidden}
+}
+
+#main{
+display:none;
+padding-top:60px;
+background:linear-gradient(270deg,#ff0080,#ff8c00,#40e0d0,#8a2be2);
+background-size:800% 800%;
+animation:bgMove 15s infinite alternate;
+height:100vh;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%}
+100%{background-position:100% 50%}
+}
+
+h1{
+font-family:'Pacifico',cursive;
+font-size:3em;
+background:linear-gradient(45deg,#ff0,#0ff,#f0f,#0f0);
+-webkit-background-clip:text;
+color:transparent;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #fff}
+to{text-shadow:0 0 25px #ff0,0 0 40px #f0f}
+}
+
+.message{
+margin:20px auto;
+padding:18px;
+width:85%;
+max-width:500px;
+background:rgba(0,0,0,0.4);
+border-radius:20px;
+font-size:20px;
+line-height:1.6;
+box-shadow:0 0 20px rgba(255,255,255,0.4);
+}
+
+button{
+padding:15px 30px;
+font-size:20px;
+border:none;
+border-radius:30px;
+background:#ff4081;
+color:white;
+cursor:pointer;
+box-shadow:0 0 20px rgba(255,255,255,.6);
+transition:.3s;
+}
+button:hover{transform:scale(1.1);}
+
+/* CONFETTI */
+.confetti{
+position:absolute;
+width:8px;
+height:8px;
+animation:fall 4s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh) rotate(0deg);}
+100%{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* FLOWERS */
+.flower{
+position:absolute;
+font-size:25px;
+animation:float 10s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-120vh);}
+}
+
+/* COLOR BURST */
+.burst{
+position:absolute;
+width:20px;
+height:20px;
+border-radius:50%;
+animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+0%{transform:scale(0);}
+100%{transform:scale(8);opacity:0;}
+}
+
+/* FULL SCREEN EXPLOSION */
+#finalBlast{
+position:fixed;
+width:100%;
+height:100%;
+background:white;
+opacity:0;
+pointer-events:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="intro">🌈 Get Ready Rohit... 🎨</div>
+
+<div id="main">
+<h1>🌸 Happy Holi Shruti & Ankit 🌸</h1>
+
+<div class="message">
+May this Holi bring vibrant colors to your life 🎨  
+Endless joy, prosperity and positivity 🌟  
+Let your dreams splash like gulaal in the sky 💖  
+</div>
+
+<button onclick="startHoli()">🎁 Start Grand Celebration</button>
+</div>
+
+<div id="finalBlast"></div>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/23/audio_8b1eaf6c1b.mp3?filename=indian-dhol-holi-112194.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+setTimeout(()=>{
+document.getElementById("main").style.display="block";
+},5000);
+
+function startHoli(){
+document.getElementById("music").play();
+createConfetti();
+createFlowers();
+}
+
+/* CONFETTI */
+function createConfetti(){
+for(let i=0;i<80;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"vw";
+c.style.background=`hsl(${Math.random()*360},100%,60%)`;
+document.body.appendChild(c);
+}
+}
+
+/* FLOWERS */
+function createFlowers(){
+for(let i=0;i<20;i++){
+let f=document.createElement("div");
+f.className="flower";
+f.innerHTML="🌸";
+f.style.left=Math.random()*100+"vw";
+document.body.appendChild(f);
+}
+}
+
+/* CLICK COLOR BURST (PICHKARI EFFECT) */
+document.addEventListener("click",function(e){
+for(let i=0;i<15;i++){
+let b=document.createElement("div");
+b.className="burst";
+b.style.left=e.clientX+"px";
+b.style.top=e.clientY+"px";
+b.style.background=`hsl(${Math.random()*360},100%,60%)`;
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),1000);
+}
+});
+
+/* GRAND FINALE */
+setTimeout(()=>{
+let blast=document.getElementById("finalBlast");
+blast.style.opacity="0.9";
+blast.style.background=`hsl(${Math.random()*360},100%,60%)`;
+setTimeout(()=>blast.style.opacity="0",800);
+},20000);
+
+</script>
+
+</body>
+</html>
